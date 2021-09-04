@@ -1,0 +1,30 @@
+{
+  "name": "sinarajabpour1998-attachment",
+  "version": "1.3.0",
+  "description": "Attachment is a javascript and css package to help sinarajabpour1998/attachment package which is a laravel package",
+  "keywords": [
+    "sinarajabpour1998-attachment",
+    "attachment",
+    "laravel-upload",
+    "upload",
+    "laravel"
+  ],
+  "dependencies": {
+    "alertifyjs": "~1.13.1",
+    "animate.css": "~4.1.1",
+    "bootstrap-v4-rtl": "~4.4.1-2",
+    "jquery-ui": "~1.12.1",
+    "lity": "~2.4.1",
+    "sweetalert2": "~10.10.1",
+    "uniqid": "~5.2.0"
+  },
+  "author": {
+    "name": "Sina Rajabpour",
+    "email": "sina.rajabpour@outlook.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sinarajabpour1998/attachment_js.git"
+  },
+  "license": "ISC"
+}
