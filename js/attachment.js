@@ -122,18 +122,19 @@ $('.gallery_image_upload').change(function () {
             dataType: 'json',
             type: 'post',
             success: function (response) {
-                if (response.status == 200) {
-                    $('#' + file_id).find('.file_name').text(response.file_name);
-                    $('#' + file_id).find('.uploaded_file_path').val(response.file_key);
-                    $('#' + file_id).find('.uploaded_file_thumbnail').attr('href', response.file_url).show();
-                    $('#' + file_id).find('.uploaded_file_thumbnail img').attr('src', response.thumbnail);
-                    $('#' + file_id ).append(caption_markup);
-                    $('#' + file_id).find('.progress').remove();
+                if (response.status === 200) {
+                    let the_file = $('#' + file_id);
+                    the_file.find('.file_name').text(response.file_name);
+                    the_file.find('.uploaded_file_path').val(response.file_key);
+                    the_file.find('.uploaded_file_thumbnail').attr('href', response.file_url).show();
+                    the_file.find('.uploaded_file_thumbnail img').attr('src', response.thumbnail);
+                    the_file.append(caption_markup);
+                    the_file.find('.progress').remove();
                     alertify.success('بارگذاری با موفقیت انجام شد.');
                 }
             },
             error: function (response) {
-                if (response.status == 422) {
+                if (response.status === 422) {
                     let response_text = $.parseJSON(response.responseText);
                     let text = response_text.errors.file[0];
                     Swal.fire({
@@ -170,7 +171,7 @@ $('.gallery_image_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 403) {
+                } else if (response.status === 403) {
                     let text = 'شما دسترسی انجام عملیات بارگذاری را ندارید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -188,7 +189,7 @@ $('.gallery_image_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 401) {
+                } else if (response.status === 401) {
                     let text = 'قبل از انجام درخواست بارگذاری وارد برنامه شوید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -251,7 +252,7 @@ $('.gallery').on('click', '.delete_file', function () {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                if(id == '') {
+                if(id === '') {
                     target.remove();
                     Swal.fire({
                         icon: 'success',
@@ -305,7 +306,7 @@ $('.gallery').on('click', '.delete_file', function () {
                             })
                         },
                         error: function(response){
-                            if( response.status == 422 ) {
+                            if( response.status === 422 ) {
                                 let response_text = $.parseJSON( response.responseText );
                                 Swal.fire({
                                     icon: 'error',
@@ -340,7 +341,7 @@ $('.gallery').on('click', '.delete_file', function () {
                                         popup: 'animated fadeOutUp'
                                     }
                                 })
-                            } else if(response.status == 403) {
+                            } else if(response.status === 403) {
                                 let text = 'شما دسترسی انجام عملیات حذف را ندارید.';
                                 Swal.fire({
                                     title: 'خطا در آپلود فایل',
@@ -423,7 +424,6 @@ $('.attachment_upload').change(function () {
         if($(this).closest('.attachments').find('.custom_disk').length) {
             formData.append('disk', $(this).closest('.attachments').find('.custom_disk').val());
         }
-        // let fail_message = '<span class="ltr">آپلود فایل ' + $(this).prop('files')[i].name + ' با خطا مواجه شد.</span>';
         // send request
         $.ajax({
             url: upload_url,
@@ -434,16 +434,18 @@ $('.attachment_upload').change(function () {
             dataType: 'json',
             type: 'post',
             success: function (response) {
-                if (response.status == 200) {
-                    $('#' + file_id).find('.file_name').text(response.file_name);
-                    $('#' + file_id).find('a').attr('href', response.file_url);
-                    $('#' + file_id).find('.uploaded_file_path').val(response.file_key);
-                    $('#' + file_id).find('.progress').remove();
+                if (response.status === 200) {
+                    let the_file = $('#' + file_id);
+                    the_file.find('.file_name').text(response.file_name);
+                    the_file.find('a').attr('href', response.file_url);
+                    the_file.find('.uploaded_file_path').val(response.file_key);
+                    the_file.find('.progress').remove();
                     alertify.success('بارگذاری با موفقیت انجام شد.');
                 }
             },
             error: function (response) {
-                if (response.status == 422) {
+                $('.attachment_file_upload').filter('#'+file_id).remove();
+                if (response.status === 422) {
                     let response_text = $.parseJSON(response.responseText);
                     let text = response_text.errors.file[0];
                     Swal.fire({
@@ -480,7 +482,7 @@ $('.attachment_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 403) {
+                } else if (response.status === 403) {
                     let text = 'شما دسترسی انجام عملیات بارگذاری را ندارید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -498,7 +500,7 @@ $('.attachment_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 401) {
+                } else if (response.status === 401) {
                     let text = 'قبل از انجام درخواست بارگذاری وارد برنامه شوید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -562,7 +564,7 @@ $('.attachments').on('click', '.delete_file', function () {
     })
         .then((result) => {
             if(result.isConfirmed) {
-                if(id == '') {
+                if(id === '') {
                     target.remove();
                     Swal.fire({
                         icon: 'success',
@@ -617,7 +619,7 @@ $('.attachments').on('click', '.delete_file', function () {
                             })
                         },
                         error: function(response){
-                            if( response.status == 422 ) {
+                            if( response.status === 422 ) {
                                 let response_text = $.parseJSON( response.responseText );
                                 Swal.fire({
                                     icon: 'error',
@@ -636,7 +638,7 @@ $('.attachments').on('click', '.delete_file', function () {
                                 })
                             } else if(response.status >= 500) {
                                 let error = $.parseJSON(response.responseText);
-                                let text = (error.tag == 'invalid') ? error.message : 'در سمت سرور خطایی بوجود آمده است.';
+                                let text = (error.tag === 'invalid') ? error.message : 'در سمت سرور خطایی بوجود آمده است.';
                                 Swal.fire({
                                     title: 'خطا در آپلود فایل',
                                     html: text,
@@ -653,7 +655,7 @@ $('.attachments').on('click', '.delete_file', function () {
                                         popup: 'animated fadeOutUp'
                                     }
                                 })
-                            } else if(response.status == 403) {
+                            } else if(response.status === 403) {
                                 let text = 'شما دسترسی انجام عملیات حذف را ندارید.';
                                 Swal.fire({
                                     title: 'خطا در آپلود فایل',
@@ -745,7 +747,6 @@ $('.video_upload').change(function () {
         if($(this).closest('.videos').find('.custom_disk').length) {
             formData.append('disk', $(this).closest('.videos').find('.custom_disk').val());
         }
-        // let fail_message = '<span class="ltr">آپلود فایل ' + $(this).prop('files')[i].name + ' با خطا مواجه شد.</span>';
         // send request
         $.ajax({
             url: upload_url,
@@ -756,17 +757,19 @@ $('.video_upload').change(function () {
             dataType: 'json',
             type: 'post',
             success: function (response) {
-                if (response.status == 200) {
-                    $('#' + file_id).find('.file_name').text(response.file_name);
-                    $('#' + file_id).find('a').attr('href', response.file_url);
-                    $('#' + file_id).find('.uploaded_file_path').val(response.file_key);
-                    $('#' + file_id ).append(caption_markup);
-                    $('#' + file_id).find('.progress').remove();
+                if (response.status === 200) {
+                    let the_file = $('#' + file_id);
+                    the_file.find('.file_name').text(response.file_name);
+                    the_file.find('a').attr('href', response.file_url);
+                    the_file.find('.uploaded_file_path').val(response.file_key);
+                    the_file.append(caption_markup);
+                    the_file.find('.progress').remove();
                     alertify.success('بارگذاری با موفقیت انجام شد.');
                 }
             },
             error: function (response) {
-                if (response.status == 422) {
+                $('.video_file_upload').filter('#'+file_id).remove();
+                if (response.status === 422) {
                     let response_text = $.parseJSON(response.responseText);
                     let text = response_text.errors.file[0];
                     Swal.fire({
@@ -803,7 +806,7 @@ $('.video_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 403) {
+                } else if (response.status === 403) {
                     let text = 'شما دسترسی انجام عملیات بارگذاری را ندارید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -821,7 +824,7 @@ $('.video_upload').change(function () {
                             popup: 'animated fadeOutUp'
                         }
                     })
-                } else if (response.status == 401) {
+                } else if (response.status === 401) {
                     let text = 'قبل از انجام درخواست بارگذاری وارد برنامه شوید.';
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
@@ -860,7 +863,7 @@ $('.video_upload').change(function () {
 });
 
 $('.videos').on('click', '.delete_file', function () {
-    let target = $(this).closest('.video_file_upload ');
+    let target = $(this).closest('.video_file_upload');
     let remove_url = $(this).closest('.videos').find('.video_upload').data('remove');
     let id = target.find('.uploaded_file_path').val();
     let type = 'video';
@@ -885,7 +888,7 @@ $('.videos').on('click', '.delete_file', function () {
     })
         .then((result) => {
             if(result.isConfirmed) {
-                if(id == '') {
+                if(id === '') {
                     target.remove();
                     Swal.fire({
                         icon: 'success',
@@ -940,7 +943,7 @@ $('.videos').on('click', '.delete_file', function () {
                             })
                         },
                         error: function(response){
-                            if( response.status == 422 ) {
+                            if( response.status === 422 ) {
                                 let response_text = $.parseJSON( response.responseText );
                                 Swal.fire({
                                     icon: 'error',
@@ -975,7 +978,7 @@ $('.videos').on('click', '.delete_file', function () {
                                         popup: 'animated fadeOutUp'
                                     }
                                 })
-                            } else if(response.status == 403) {
+                            } else if(response.status === 403) {
                                 let text = 'شما دسترسی انجام عملیات حذف را ندارید.';
                                 Swal.fire({
                                     title: 'خطا در آپلود فایل',
