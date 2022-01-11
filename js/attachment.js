@@ -137,6 +137,8 @@ $('.gallery_image_upload').change(function () {
                 if (response.status === 422) {
                     let response_text = $.parseJSON(response.responseText);
                     let text = response_text.errors.file[0];
+                    let gallery = target.find('.gallery_files');
+                    gallery.find("#" + file_id).remove();
                     Swal.fire({
                         title: 'خطا در آپلود فایل',
                         html: text,
