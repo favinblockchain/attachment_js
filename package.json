@@ -1,9 +1,9 @@
 {
-  "name": "sinarajabpour1998-attachment",
+  "name": "favinblockchain-attachment",
   "version": "1.4.0",
-  "description": "Attachment is a javascript and css package to help sinarajabpour1998/attachment package which is a laravel package",
+  "description": "Attachment is a javascript and css package to help favinblockchain/attachment package which is a laravel package",
   "keywords": [
-    "sinarajabpour1998-attachment",
+    "favinblockchain-attachment",
     "attachment-js",
     "laravel-upload",
     "upload",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/sinarajabpour1998/attachment_js.git"
+    "url": "git+ssh://git@github.com/favinblockchain/attachment_js.git"
   },
   "license": "ISC"
 }
