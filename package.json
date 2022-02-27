@@ -1,6 +1,6 @@
 {
   "name": "favinblockchain-attachment",
-  "version": "1.4.0",
+  "version": "1.0.0",
   "description": "Attachment is a javascript and css package to help favinblockchain/attachment package which is a laravel package",
   "keywords": [
     "favinblockchain-attachment",
